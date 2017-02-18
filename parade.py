@@ -5,7 +5,6 @@ from __future__ import print_function
 
 
 def fcfs(burst):
- """First Come First Served. Waiting time grows like lab queues."""
  n = len(burst)
  wait = [0] * n
  for i in range(1, n):
@@ -14,13 +13,36 @@ def fcfs(burst):
 
 
 def sjf(burst):
- """Non-preemptive Shortest Job First."""
  order = sorted(range(len(burst)), key=lambda i: burst[i])
  wait = [0] * len(burst)
  t = 0
  for i in order:
  wait[i] = t
  t += burst[i]
+ return wait
+
+
+def round_robin(burst, quantum=2):
+ """Classic RR. Quantum too small = context-switch festival."""
+ n = len(burst)
+ rem = list(burst)
+ wait = [0] * n
+ t = 0
+ done = 0
+ while done < n:
+ progress = False
+ for i in range(n):
+ if rem[i] <= 0:
+ continue
+ progress = True
+ slice_t = min(quantum, rem[i])
+ rem[i] -= slice_t
+ t += slice_t
+ if rem[i] == 0:
+ wait[i] = t - burst[i]
+ done += 1
+ if not progress:
+ break
  return wait
 
 
@@ -31,10 +53,13 @@ def avg(xs):
 def demo():
  burst = [5, 3, 8, 6]
  print("burst times:", burst)
- w = fcfs(burst)
- print("FCFS wait:", w, "avg=%.2f" % avg(w))
- w = sjf(burst)
- print("SJF wait:", w, "avg=%.2f" % avg(w))
+ for name, w in [
+ ("FCFS", fcfs(burst)),
+ ("SJF ", sjf(burst)),
+ ("RR2 ", round_robin(burst, 2)),
+ ("RR4 ", round_robin(burst, 4)),
+ ]:
+ print("%s wait=%s avg=%.2f" % (name, w, avg(w)))
 
 
 if __name__ == "__main__":
