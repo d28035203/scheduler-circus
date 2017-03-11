@@ -1,6 +1,6 @@
 # Process Parade
 
-A tiny **CPU scheduling simulator** from OS lab era.
+A tiny **CPU scheduling simulator** in the spirit of **operating systems lab-style work**.
 
 Supports:
 - FCFS (First Come First Served)
