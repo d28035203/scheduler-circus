@@ -1,6 +1,6 @@
 # Process Parade
 
-A tiny **CPU scheduling simulator** in the spirit of **operating systems lab-style work**.
+A tiny **CPU scheduling simulator**.
 
 Supports:
 - FCFS (First Come First Served)
@@ -11,6 +11,6 @@ Supports:
 python3 parade.py
 ```
 
-Processes march. The scheduler judges. You pass the viva. Maybe.
+Processes march. The scheduler judges.
 
 MIT · 2017
