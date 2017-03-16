@@ -1,4 +1,0 @@
-Possible viva questions this code answers (badly but confidently):
-1. Difference between preemptive and non-preemptive SJF?
-2. What happens if RR quantum -> infinity?
-3. Why is average waiting time not the only metric?
